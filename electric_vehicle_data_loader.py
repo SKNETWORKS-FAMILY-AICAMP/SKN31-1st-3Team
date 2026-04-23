@@ -22,18 +22,26 @@ df_long['count'] = pd.to_numeric(df_long['count'], errors='coerce')
 df_long = df_long.dropna(subset=['count'])
 df_long['count'] = df_long['count'].astype(int)
 
-#  DB insert
-conn = get_connection()
-cursor = conn.cursor()
-
-data = list(df_long[['year', 'month', 'region', 'count']].itertuples(index=False, name=None))
-
-sql = """
-INSERT INTO electric_vehicle_count (year, month, region, count)
-VALUES (%s, %s, %s, %s)
-ON DUPLICATE KEY UPDATE
-count = VALUES(count);
-"""
-
-cursor.executemany(sql, data)
-conn.commit()
+try:
+    conn = get_connection()
+    cursor = conn.cursor()
+    
+    data = list(df_long[['year', 'month', 'region', 'count']].itertuples(index=False, name=None))
+    
+    sql = """
+    INSERT INTO electric_vehicle_count (year, month, region, count)
+    VALUES (%s, %s, %s, %s)
+    ON DUPLICATE KEY UPDATE
+    count = VALUES(count);
+    """
+    cursor.executemany(sql, data)
+    conn.commit()
+except Exception as e:
+    print(f"에러 발생: {e}")
+    if conn:
+        conn.rollback() 
+        
+finally:
+    if conn:
+        cursor.close() 
+        conn.close() 

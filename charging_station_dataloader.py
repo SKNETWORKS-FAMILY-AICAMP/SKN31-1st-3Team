@@ -23,31 +23,32 @@ df_long = df.melt(
 df_long = df_long.dropna()
 
 # DB 연결
-conn = get_connection()
-cursor = conn.cursor()
-
-# INSERT 쿼리
-query = """
-INSERT INTO ev_charger (month, speed, region, count)
-VALUES (%s, %s, %s, %s)
-ON DUPLICATE KEY UPDATE
-count = VALUES(count)
-"""
-
-# 데이터 삽입
-for _, row in df_long.iterrows():
-    cursor.execute(query, (
+try:
+    conn = get_connection()
+    cursor = conn.cursor()
+    
+    query = """
+    INSERT INTO ev_charger (month, speed, region, count)
+    VALUES (%s, %s, %s, %s)
+    ON DUPLICATE KEY UPDATE
+    count = VALUES(count)
+    """
+    
+    for _, row in df_long.iterrows():
+        cursor.execute(query, (
         str(row["month"]),
         row["speed"],
         row["region"],
         int(row["count"])
     ))
+        
 
-# 커밋
-conn.commit()
-
-# 종료
-cursor.close()
-conn.close()
-
-#print("데이터 삽입 완료")
+except Exception as e:
+    print(f"에러 발생: {e}")
+    if conn:
+        conn.rollback() 
+        
+finally:
+    if conn:
+        cursor.close() 
+        conn.close() 
