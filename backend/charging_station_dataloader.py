@@ -1,8 +1,8 @@
 
-from db.db_connect import get_connection
+from backend.db.db_connect import get_connection
 import pandas as pd
 
-df = pd.read_excel(r"Dataset\202512년_지역별_전기차_충전기_구축현황(누적).xls", header = 4)
+df = pd.read_excel(r"backend\Dataset\202512년_지역별_전기차_충전기_구축현황(누적).xls", header = 4)
 
 df.columns = [
     "month", "speed", "서울", "경기", "인천",

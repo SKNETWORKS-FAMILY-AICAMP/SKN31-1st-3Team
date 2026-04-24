@@ -1,7 +1,7 @@
 import pandas as pd
-from db.db_connect import get_connection
+from backend.db.db_connect import get_connection
 
-df = pd.read_excel(r"Dataset\합친_전기데이터.xlsx")
+df = pd.read_excel(r"backend\Dataset\합친_전기데이터.xlsx")
 
 df.columns = ["년월", "시도", "시군구", "용도", "고객수", "판매량", "판매수입"]
 

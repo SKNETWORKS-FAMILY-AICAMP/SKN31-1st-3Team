@@ -1,9 +1,9 @@
-from db.db_connect import get_connection
+from backend.db.db_connect import get_connection
 import pandas as pd
 from datetime import datetime
 
 # 엑셀 읽기
-df = pd.read_excel(r"Dataset/주유소_제품별_평균판매가격.xlsx", header=8)
+df = pd.read_excel(r"backend\Dataset/주유소_제품별_평균판매가격.xlsx", header=8)
 
 df.columns = ["date", "premium", "regular"]
 

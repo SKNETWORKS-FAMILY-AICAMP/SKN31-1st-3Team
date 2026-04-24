@@ -1,7 +1,7 @@
-from db.db_connect import get_connection
+from backend.db.db_connect import get_connection
 import pandas as pd
 
-df = pd.read_excel(r"Dataset\201504_202604_전기차등록현황.xls", header=3)
+df = pd.read_excel(r"backend\Dataset\201504_202604_전기차등록현황.xls", header=3)
 df = df.drop(columns=['합계'])
 
 df_long = df.melt(

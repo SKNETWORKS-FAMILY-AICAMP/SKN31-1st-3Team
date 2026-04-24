@@ -1,7 +1,7 @@
-from db.db_connect import get_connection
+from backend.db.db_connect import get_connection
 import pandas as pd
 
-df = pd.read_csv(r"Dataset\자동차등록대수현황_2015~2025.csv", encoding='cp949', header=45)
+df = pd.read_csv(r"backend\Dataset\자동차등록대수현황_2015~2025.csv", encoding='cp949', header=45)
 #print(df)
 
 df.columns = ['type', 'year', 'total', 'official', 'private', 'business']
