@@ -30,16 +30,37 @@ CREATE TABLE ev_charger (
 ALTER TABLE ev_charger
 ADD UNIQUE KEY unique_ev (month, speed, region);
 
--- n년간의 기름값 데이터
+-- n년간의 휘발유값 데이터
 CREATE TABLE fuel_price (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    date DATE,
-    week INT,
-    premium FLOAT,
-    regular FLOAT
+    date DATE PRIMARY KEY,
+    regular_price FLOAT,
+    premium_price FLOAT
 );
-ALTER TABLE fuel_price
-ADD UNIQUE KEY unique_fuel (date, week);
 
-select * from fuel_price;
+
+-- n년간 경유 데이터
+CREATE TABLE diesel_price (
+    date DATE PRIMARY KEY,
+    price FLOAT,
+    FOREIGN KEY (date) REFERENCES fuel_price(date)
+);
+ALTER TABLE diesel_price
+ADD UNIQUE (date);
+
+-- n년간 전기요금 데이터
+CREATE TABLE e_price (
+     date DATE PRIMARY KEY,
+     price FLOAT,
+     FOREIGN KEY (date) REFERENCES fuel_price(date)
+);
+ALTER TABLE e_price
+ADD UNIQUE (date);	
+
+
+
+
+
+
+
+
 

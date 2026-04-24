@@ -41,6 +41,7 @@ try:
         row["region"],
         int(row["count"])
     ))
+    conn.commit()
         
 
 except Exception as e:

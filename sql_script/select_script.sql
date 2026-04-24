@@ -35,3 +35,15 @@ FROM ev_charger
 WHERE RIGHT(month, 2) IN ('06', '12')
 GROUP BY month, region
 ORDER BY month, region;
+
+-- 경유, 휘발유, 전기 값 비교
+SELECT 
+    f.date,
+    f.regular_price,
+    f.premium_price,
+    d.price AS diesel_price,
+    e.price AS electric_price
+FROM fuel_price f
+LEFT JOIN diesel_price d ON f.date = d.date
+LEFT JOIN e_price e ON f.date = e.date
+ORDER BY f.date;
