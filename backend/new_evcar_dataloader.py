@@ -11,14 +11,6 @@ try:
     conn = get_connection()
     cursor = conn.cursor()
  
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS ev_registration_by_year (
-            year    INT   PRIMARY KEY  COMMENT '연도',
-            car     INT               COMMENT '전체 자동차 신규등록 대수',
-            ev_car  INT   NOT NULL     COMMENT '전기차 신규등록 대수'
-        )
-    """)
- 
     for _, row in df.iterrows():
         car_val = None if pd.isna(row['car']) else int(row['car'])
         cursor.execute(

@@ -56,7 +56,12 @@ CREATE TABLE e_price (
 ALTER TABLE e_price
 ADD UNIQUE (date);	
 
-
+-- n년간 전기차 신규 등록 데이터
+CREATE TABLE ev_registration_by_year (
+            year    INT   PRIMARY KEY  COMMENT '연도',
+            car     INT               COMMENT '전체 자동차 신규등록 대수',
+            ev_car  INT   NOT NULL     COMMENT '전기차 신규등록 대수'
+        )
 
 
 
