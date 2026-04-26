@@ -14,7 +14,12 @@ try:
     for _, row in df.iterrows():
         car_val = None if pd.isna(row['car']) else int(row['car'])
         cursor.execute(
-            "INSERT INTO ev_registration_by_year (year, car, ev_car) VALUES (%s, %s, %s)",
+            """
+            INSERT INTO ev_registration_by_year (year, car, ev_car) VALUES (%s, %s, %s) 
+            ON DUPLICATE KEY UPDATE 
+            car = VALUES(car),
+            ev_car = VALUES(ev_car)
+            """,
             (int(row['year']), car_val, int(row['ev_car'])))
  
     conn.commit()
