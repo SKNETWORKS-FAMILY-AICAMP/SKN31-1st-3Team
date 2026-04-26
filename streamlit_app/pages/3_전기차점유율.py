@@ -19,9 +19,16 @@ st.title("전기차 등록 현황")
 st.text("전기차 등록 비율의 증가 추이")
 st.set_page_config(layout="wide")
 
-rdf = pd.DataFrame(get_data_from_db("select * from ev_registration_by_year"))
-car = pd.DataFrame(get_data_from_db("select * from car_total"))
-evcar = pd.DataFrame(get_data_from_db("select * from electric_vehicle_count"))
+@st.cache_data()
+def load_registrated_car_data():
+    rdf = pd.DataFrame(get_data_from_db("select * from ev_registration_by_year"))
+    car = pd.DataFrame(get_data_from_db("select * from car_total"))
+    evcar = pd.DataFrame(get_data_from_db("select * from electric_vehicle_count"))
+    return rdf, car, evcar
+temp = load_registrated_car_data()
+rdf = temp[0]
+car = temp[1]
+evcar = temp[2]
 
 
 # 1번째 줄 좌측 연도별 전기차 신규 등록 대수 그래프

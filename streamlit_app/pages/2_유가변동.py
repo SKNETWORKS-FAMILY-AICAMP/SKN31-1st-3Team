@@ -12,6 +12,7 @@ TANK_GAS = 50
 TANK_DIESEL = 55
 BATTERY = 60
 ###########################################크롤링 함수 #########################################################################
+@st.cache_data
 def get_current_x_price(url):
     try:
         rq = requests.get(url, headers=headers)
@@ -58,7 +59,9 @@ with col3:
 
 ##########################DB 쿼리로 값 가져오기 #################################################################################
 st.divider()
-query = """
+@st.cache_data()
+def load_fuel_data():
+    query = """
 SELECT 
     f.date,
     f.regular_price,
@@ -70,7 +73,10 @@ LEFT JOIN diesel_price d ON f.date = d.date
 JOIN e_price e ON f.date = e.date
 ORDER BY f.date;
 """
-df = get_data_from_db(query)
+    df = get_data_from_db(query)
+    return df
+
+df = load_fuel_data()
 ######################################풀 주유/ 충전 값 계산 ###################################################################
 df_calc = df.copy()
 
