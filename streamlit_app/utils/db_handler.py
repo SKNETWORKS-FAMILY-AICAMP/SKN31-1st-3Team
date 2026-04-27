@@ -1,14 +1,26 @@
 import sys
 import os
 import pandas as pd
+import pymysql
+from dotenv import load_dotenv
+import os
 
-# 프로젝트 루트 경로를 sys.path에 추가 (backend를 찾기 위함)
-current_dir = os.path.dirname(os.path.abspath(__file__))
-project_root = os.path.abspath(os.path.join(current_dir, "../../"))
-if project_root not in sys.path:
-    sys.path.append(project_root)
 
-from backend.db.db_connect import get_connection
+
+load_dotenv()
+
+def get_connection():
+    return pymysql.connect(
+        host=os.getenv("DB_HOST"),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD"),
+        database=os.getenv("DB_NAME"),
+        port=int(os.getenv("DB_PORT", 3306)),
+        charset='utf8mb4',
+        use_unicode=True
+    )
+
+
 
 def get_data_from_db(query):
     conn = None

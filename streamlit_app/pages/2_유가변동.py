@@ -1,12 +1,8 @@
 import sys
 import os
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-
 import streamlit as st
-import requests
-from bs4 import BeautifulSoup
 from utils.db_handler import get_data_from_db
-from streamlit_app.utils.crawling_handler import get_current_x_price
+from utils.crawling_handler import get_current_x_price
 import plotly.express as px
 
 TANK_GAS = 50

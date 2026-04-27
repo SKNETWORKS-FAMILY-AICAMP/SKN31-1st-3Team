@@ -1,11 +1,12 @@
-from backend.db.db_connect import get_connection
+from streamlit_app.utils.db_handler import get_connection
 import pandas as pd
 from datetime import datetime
+
 def run():
     # 엑셀 읽기
-    df = pd.read_excel(r"backend\Dataset/경유_가격데이터.xlsx")
+    df = pd.read_excel(r"backend\Dataset/주유소_제품별_평균판매가격.xlsx", header=8)
 
-    df.columns = ["date", "diesel_price"]
+    df.columns = ["date", "premium", "regular"]
 
     # 날짜 파싱
     def parse_date(text):
@@ -26,31 +27,34 @@ def run():
     )
 
     # 필요한 컬럼만
-    df = df[["date", "diesel_price"]]
+    df = df[["date", "premium", "regular"]]
 
     # NaN 제거
     df = df.dropna()
 
     df = df.groupby("date").agg({
-        "diesel_price": "mean",
+        "premium": "mean",
+        "regular": "mean"
     }).reset_index()
-    conn = None
 
+    conn = None
     try:
         conn = get_connection()
         cursor = conn.cursor()
         
         query = """
-        INSERT INTO diesel_price (date, price)
-        VALUES (%s, %s)
+        INSERT INTO fuel_price (date, premium_price, regular_price)
+        VALUES (%s, %s, %s)
         ON DUPLICATE KEY UPDATE
-        price = VALUES(price)
+        premium_price = VALUES(premium_price),
+        regular_price = VALUES(regular_price)
         """
         
         data = [
             (
                 row["date"],
-                float(row["diesel_price"])
+                float(row["premium"]),
+                float(row["regular"])
             )
             for _, row in df.iterrows()
         ]

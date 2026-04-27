@@ -8,8 +8,8 @@ warnings.filterwarnings("ignore", category=UserWarning)
 import pandas as pd
 import streamlit as st
  
-from backend.db.db_connect import get_connection
-from streamlit_app.utils.map_handler import (
+from utils.db_handler import get_connection
+from utils.map_handler import (
     load_geojson,
     merge_sidos_to_regions,
     prepare_map_data,

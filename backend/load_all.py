@@ -1,10 +1,10 @@
-from backend import charging_station_dataloader
-from backend import diesel_price_dataloader
-from backend import elec_price_dataloader
-from backend import electric_vehicle_data_loader
-from backend import gas_price_dataloader
-from backend import new_evcar_dataloader
-from backend import total_vehicle_data_loader
+from backend.Loaders import charging_station_dataloader
+from backend.Loaders import diesel_price_dataloader
+from backend.Loaders import elec_price_dataloader
+from backend.Loaders import electric_vehicle_data_loader
+from backend.Loaders import gas_price_dataloader
+from backend.Loaders import new_evcar_dataloader
+from backend.Loaders import total_vehicle_data_loader
 
 
 def run():

@@ -1,5 +1,5 @@
 import pandas as pd
-from backend.db.db_connect import get_connection
+from streamlit_app.utils.db_handler import get_connection
 
 def run():
     df = pd.read_excel(r"backend\Dataset\합친_전기데이터.xlsx")

@@ -1,4 +1,4 @@
-from backend.db.db_connect import get_connection
+from streamlit_app.utils.db_handler import get_connection
 import pandas as pd
 
 def run():

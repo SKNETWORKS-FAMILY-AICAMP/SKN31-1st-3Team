@@ -1,7 +1,7 @@
 import streamlit as st
 import streamlit.components.v1 as components
 from utils.kakao_map_handler import get_distance
-from streamlit_app.utils.crawling_handler import get_current_x_price
+from utils.crawling_handler import get_current_x_price
 import pandas as pd
 
 

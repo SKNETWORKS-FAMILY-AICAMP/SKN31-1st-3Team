@@ -1,5 +1,5 @@
 
-from backend.db.db_connect import get_connection
+from streamlit_app.utils.db_handler import get_connection
 import pandas as pd
 def run():
     df = pd.read_excel(r"backend\Dataset\202512년_지역별_전기차_충전기_구축현황(누적).xls", header = 3)

@@ -1,4 +1,4 @@
-from backend.db.db_connect import get_connection
+from streamlit_app.utils.db_handler import get_connection
 import pandas as pd
 def run():
     df = pd.read_csv(r"backend\Dataset\자동차등록대수현황_2015~2025.csv", encoding='cp949', header=45)
