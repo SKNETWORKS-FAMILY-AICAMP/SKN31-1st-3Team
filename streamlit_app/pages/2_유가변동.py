@@ -215,7 +215,7 @@ with col2:
 
 #######################################사용자한테 절감효과 보여주기#######################################################
 st.divider()
-st.write("📊 **500Km 주행 기준 절감률**")
+st.write("**🚗 500km 주행 기준, 전기차 전환 시 연료비 절감률 비교**")
 latest = df_calc.iloc[-1]
 
 fuel_map = {
@@ -237,14 +237,16 @@ diff_percent = (
 
 col1, col2, col3 = st.columns(3)
 col1.metric(
-    label="절감률",
-    value=f"{diff_percent:.2f}%"
+    label="전기차 비용",
+    value=f"{latest['electric_full']:,.0f}원"
 )
 col2.metric(
-    label="연료비",
+    label=f"{fuel_type} 비용",
     value=f"{latest[col]:,.0f}원"
 )
 col3.metric(
-    label="전기차 비용",
-    value=f"{latest['electric_full']:,.0f}원"
+    label="💸 절감률",
+    value=f"{latest[col] - latest["electric_full"]:.2f}원",
+    delta=f"{diff_percent:.2f}%",
+    delta_color="inverse"  # 절감률 높을수록 초록색
 )
