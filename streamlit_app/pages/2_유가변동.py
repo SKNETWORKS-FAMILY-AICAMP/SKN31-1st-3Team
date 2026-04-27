@@ -6,31 +6,13 @@ import streamlit as st
 import requests
 from bs4 import BeautifulSoup
 from utils.db_handler import get_data_from_db
+from streamlit_app.utils.crawling_handler import get_current_x_price
 import plotly.express as px
 
 TANK_GAS = 50
 TANK_DIESEL = 55
 BATTERY = 60
-###########################################크롤링 함수 #########################################################################
-@st.cache_data
-def get_current_x_price(url):
-    try:
-        rq = requests.get(url, headers=headers)
-    except Exception as e:
-        print("error:", e)
-        return
 
-    soup = BeautifulSoup(rq.text, "html.parser")
-
-    sections = soup.select("div.grid.grid-cols-2.gap-4")
-    temp = []
-    
-    for section in sections:
-        h3_list = section.select("h3.text-title4-b")
-        for h3 in h3_list:
-            temp.append(h3.text)
-    return temp
-##########################################################################################################################
 url1 = "https://www.oilnow.co.kr/%EC%A3%BC%EC%9C%A0%EC%86%8C-%EA%B0%80%EA%B2%A9%EB%B9%84%EA%B5%90/%ED%9C%98%EB%B0%9C%EC%9C%A0/%EC%84%9C%EC%9A%B8"
 url2 = "https://www.oilnow.co.kr/%EC%A3%BC%EC%9C%A0%EC%86%8C-%EA%B0%80%EA%B2%A9%EB%B9%84%EA%B5%90/%EA%B3%A0%EA%B8%89%EC%9C%A0/%EC%84%9C%EC%9A%B8"
 url3 = "https://www.oilnow.co.kr/%EC%A3%BC%EC%9C%A0%EC%86%8C-%EA%B0%80%EA%B2%A9%EB%B9%84%EA%B5%90/%EA%B2%BD%EC%9C%A0/%EC%84%9C%EC%9A%B8"
@@ -248,5 +230,5 @@ col3.metric(
     label="💸 절감률",
     value=f"{latest[col] - latest["electric_full"]:.2f}원",
     delta=f"{diff_percent:.2f}%",
-    delta_color="inverse"  # 절감률 높을수록 초록색
+    delta_color="inverse"  
 )
