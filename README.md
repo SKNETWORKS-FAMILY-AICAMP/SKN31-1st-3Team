@@ -12,7 +12,7 @@
 |---|---|---|---|
 | <img src="./asset/the_creator.jpg" width="120" height="120" style="object-fit: contain;"/> | <img src="./asset/ribbon_geodude.png" width="120" height="120" style="object-fit: contain;"/> | <img src="./asset/pikachu.jpg" width="120" height="120" style="object-fit: contain;"/> | <img src="./asset/nuo.jpg" width="120" height="120" style="object-fit: contain;"/> |
 | **박동관 (PM)** | **김봉남** | **이영창** | **박종현** |
-| 기획/DB설계/화면설계/크롤링 | 기획/화면설계/크롤링 | 기획/크롤링/화면설계 | 기획/크롤링/화면설계 |
+| 기획/DB설계<br/>화면설계/크롤링 | 기획/화면설계/크롤링 | 기획/크롤링/화면설계 | 기획/크롤링/화면설계 |
 | [GitHub](https://github.com/Parkdongkwan) | [GitHub](https://github.com/bongrybong) | [GitHub](https://github.com/lyc9872-lab) | [GitHub](https://github.com/jongpark0098) |
 ---
 
