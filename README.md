@@ -4,46 +4,16 @@
 
 ## 전기차 홍보대사 
 
-<!-- <table>
-  <tr>
-    <td align="center">
-      <img src="이미지링크1" width="120"/><br/>
-      <b>박동관<PM></b><br/>
-      기획/DB설계/화면설계/크롤링/BE<br/><br/>
-      <a href="https://github.com/Parkdongkwan">
-        <img src="https://img.shields.io/badge/GitHub-KIMSUJIN02-black?logo=github"/>
-      </a>
-    </td>
+## 👥 전기차 홍보대사
 
-    <td align="center">
-      <img src="이미지링크2" width="120"/><br/>
-      <b>김봉남</b><br/>
-      기획/화면설계/크롤링<br/><br/>
-      <a href="https://github.com/WHITEHOLE17">
-        <img src="https://img.shields.io/badge/GitHub-WHITEHOLE17-black?logo=github"/>
-      </a>
-    </td>
+---
 
-    <td align="center">
-      <img src="이미지링크3" width="120"/><br/>
-      <b>이영창</b><br/>
-      기획/크롤링/화면설계<br/><br/>
-      <a href="https://github.com/PARKSAY">
-        <img src="https://img.shields.io/badge/GitHub-PARKSAY-black?logo=github"/>
-      </a>
-    </td>
-
-    <td align="center">
-      <img src="이미지링크4" width="120"/><br/>
-      <b>박종현</b><br/>
-      기획/크롤링/화면설계<br/><br/>
-      <a href="https://github.com/AREUM117">
-        <img src="https://img.shields.io/badge/GitHub-AREUM117-black?logo=github"/>
-      </a>
-    </td>
-  </tr>
-</table> -->
-
+| | | | |
+|---|---|---|---|
+| <img src="./asset/the_creator.jpg" width="120" height="120" style="object-fit: contain;"/> | <img src="./asset/ribbon_geodude.png" width="120" height="120" style="object-fit: contain;"/> | <img src="./asset/pikachu.jpg" width="120" height="120" style="object-fit: contain;"/> | <img src="./asset/nuo.jpg" width="120" height="120" style="object-fit: contain;"/> |
+| **박동관 (PM)** | **김봉남** | **이영창** | **박종현** |
+| 기획/DB설계/화면설계/크롤링 | 기획/화면설계/크롤링 | 기획/크롤링/화면설계 | 기획/크롤링/화면설계 |
+| [GitHub](https://github.com/Parkdongkwan) | [GitHub](https://github.com/bongrybong) | [GitHub](https://github.com/lyc9872-lab) | [GitHub](https://github.com/jongpark0098) |
 ---
 
 ## 📌 프로젝트 개요
@@ -77,11 +47,12 @@
 ## 🛠 기술 스택
 
 <p>
-  <img src="https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white"/>
-  <img src="https://img.shields.io/badge/MariaDB-003545?logo=mariadb&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Pandas-150458?logo=pandas&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Selenium-43B02A?logo=selenium&logoColor=white"/>
-  <img src="https://img.shields.io/badge/BeautifulSoup-000000"/>
-  <img src="https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white"/>
+<img src="https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white"/>
+<img src="https://img.shields.io/badge/Pandas-150458?logo=pandas&logoColor=white"/>
+<img src="https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white"/>
+<img src="https://img.shields.io/badge/Plotly-3F4F75?logo=plotly&logoColor=white"/>
+<img src="https://img.shields.io/badge/NumPy-013243?logo=numpy&logoColor=white"/>
+<img src="https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white"/>
+<img src="https://img.shields.io/badge/BeautifulSoup-000000"/>
+<img src="https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white"/>
 </p>
