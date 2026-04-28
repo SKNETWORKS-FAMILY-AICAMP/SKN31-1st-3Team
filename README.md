@@ -95,11 +95,20 @@
 <img src="https://img.shields.io/badge/Pandas-150458?logo=pandas&logoColor=white"/>
 <img src="https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white"/>
 <img src="https://img.shields.io/badge/Plotly-3F4F75?logo=plotly&logoColor=white"/>
-<img src="https://img.shields.io/badge/NumPy-013243?logo=numpy&logoColor=white"/>
 <img src="https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white"/>
 <img src="https://img.shields.io/badge/BeautifulSoup-000000"/>
 <img src="https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white"/>
 </p>
+
+## 📝 팀 프로젝트 회고
+
+
+| 이름 | 회고 내용 |
+| :---: | :--- |
+| **박동관** |  |
+| **김봉남** |  |
+| **이영창** |  |
+| **박종현** |  |
 
 
 ## 5. 요구사항 명세서
