@@ -1,0 +1,21 @@
+연도별_전기차_신규등록_대수 -> 기후 에너지 환경부
+-> https://www.mcee.go.kr/home/web/board/read.do;jsessionid=celR1t0fN3STHVKQh0bk5BqaDUNqZPmG4C1HYOE8.mehome2?pagerOffset=0&maxPageItems=10&maxIndexPages=10&searchKey=&searchValue=&menuId=10598&orgCd=&boardId=1858650&boardMasterId=939&boardCategoryId=&decorator=
+
+합친_전기데이터 -> 공공 데이터 포탈
+-> https://www.data.go.kr/data/15120784/fileData.do
+
+201504_202604_전기차등록현황 -> 통계 정보 charge info
+-> https://chargeinfo.ksga.org/front/statistics/evCar
+
+201512년_지역별_전기차_충전기_구축현황 -> 통계 정보 charge info
+-> https://chargeinfo.ksga.org/front/statistics/charger
+
+경유_가격데이터 -> 오피넷
+-> https://www.opinet.co.kr/user/dopospdrg/dopOsPdrgAreaView.do
+
+주유소_제품별_평균판매가격 -> 오피넷
+-> https://www.opinet.co.kr/user/dopospdrg/dopOsPdrgAreaView.do
+
+자동차등록대수현황_2015~2025 -> 국토교통 통계누리
+-> https://stat.molit.go.kr/portal/cate/statView.do?hRsId=58&hFormId=&hSelectId=&sStyleNum=&sStart=&sEnd=&hPoint=&hAppr=&oFileName=&rFileName=&midpath=
+

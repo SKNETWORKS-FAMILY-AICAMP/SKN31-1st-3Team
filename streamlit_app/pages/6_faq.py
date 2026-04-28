@@ -122,3 +122,6 @@ with tab2:
     
 st.divider()
 st.caption("본 정보는 참고용이며 정확한 내용은 공식 발표를 확인하세요.")
+
+if st.button("🏠 메인 대시보드로 돌아가기", use_container_width=True):
+    st.switch_page("app_demo.py") # 메인 파일명에 맞춰 수정 (보통 app.py 또는 main.py)

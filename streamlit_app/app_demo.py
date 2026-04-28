@@ -257,6 +257,8 @@ if selected == "대시보드":
         if st.button("🔍 전체 FAQ 리스트 확인하기", use_container_width=True):
         # 팀원이 만든 상세 FAQ 페이지 파일명으로 이동
             st.switch_page("pages/6_faq.py") # 실제 파일 경로에 맞게 수정해줘!
+
+            
             
 # -------------------
 # 2. 유가분석
