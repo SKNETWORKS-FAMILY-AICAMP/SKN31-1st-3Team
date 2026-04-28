@@ -1,9 +1,6 @@
 import streamlit as st
-import time
-import numpy as np
 import json
 import os
-from utils.crawling_handler import crawl_pse_faq
 
 st.set_page_config(
     page_title="전기차 FAQ",
@@ -11,63 +8,117 @@ st.set_page_config(
     layout="wide",
 )
 
+# ============================================================
+# 경로 설정
+# ============================================================
 _THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 
 SUBSIDY_FAQ_PATH = os.path.join(
-    _THIS_DIR, "..", "..", "backend", "Dataset", "faq_data.json"
+    _THIS_DIR, "..", "..", "backend", "Dataset", "ev_vs_faq.json"
+)
+
+PSE_FAQ_PATH = os.path.join(
+    _THIS_DIR, "..", "..", "backend", "Dataset", "pse_faq.json"
 )
 
 
+# ============================================================
+# 데이터 로드
+# ============================================================
 @st.cache_data
 def load_faq(path):
-    with open(path, encoding="utf-8") as f:
+    with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
-def show_faq(faq_list):
-    """FAQ 리스트를 검색창 + expander로 표시."""
-    search = None # st.text_input("질문 검색", placeholder="키워드를 입력하세요", key=faq_list[0]["question"]) 
+# ============================================================
+# FAQ 데이터 형식 통일
+# ============================================================
+def normalize_faq(faq_data):
+    """
+    dict 형태와 list 형태의 FAQ 데이터를
+    [{"question": "...", "answer": "..."}] 형태로 통일
+    """
 
-    if search:
-        keyword = search.lower()
-        filtered = [
-            item for item in faq_list
-            if keyword in item["question"].lower()
-            or keyword in item["answer"].lower()
+    if isinstance(faq_data, dict):
+        return [
+            {"question": question, "answer": answer}
+            for question, answer in faq_data.items()
         ]
-    else:
-        filtered = faq_list
 
-    if not filtered:
-        st.info("검색 결과가 없습니다.")
+    elif isinstance(faq_data, list):
+        return faq_data
+
     else:
-        for item in filtered:
-            with st.expander(item["question"]):
-                st.markdown(item["answer"])
+        return []
+
+
+# ============================================================
+# PSE FAQ에서 보여줄 질문만 선택
+# ============================================================
+def pick_faq(faq_data):
+    faq_list = normalize_faq(faq_data)
+
+    include_keywords = [
+        "전기차는 실제로 환경에 더 좋은가요",
+        "EV 배터리 생산이 환경에 미치는 영향",
+        "EV 배터리를 제거하면",
+        "BEV와 PHEV의 차이점",
+        "전기 트럭을 이용할 수 있나요",
+        "EV는 한 번 충전으로 얼마나 멀리",
+        "겨울 날씨",
+        "EV 배터리는 안전한가요",
+        "배터리를 교체해야 하나요",
+    ]
+
+    picked = []
+
+    for item in faq_list:
+        question = item.get("question", "")
+
+        if any(keyword in question for keyword in include_keywords):
+            picked.append(item)
+
+    return picked
+
+
+# ============================================================
+# FAQ 출력 함수
+# ============================================================
+def show_faq(faq_data):
+    """FAQ 데이터를 expander로 표시."""
+
+    faq_list = normalize_faq(faq_data)
+
+    if not faq_list:
+        st.info("FAQ 데이터가 없습니다.")
+        return
+
+    for item in faq_list:
+        question = item.get("question", "질문 없음")
+        answer = item.get("answer", "답변 없음")
+
+        with st.expander(question):
+            st.markdown(answer)
 
 
 # ============================================================
 # 페이지
-url= 'https://www.pse.com/ko/pages/electric-cars/electric-vehicles-faq'
-faq_data = crawl_pse_faq(url)
-items = list(faq_data.items())
-over = (len(items) + 1) // 2  
-
+# ============================================================
 st.title("FAQ")
 st.text("자주 묻는 질문들을 모아 봤습니다.")
 st.divider()
 
-tab1, tab2 = st.tabs(["보조금 FAQ", "전기차 FAQ"])
+tab1, tab2 = st.tabs(["전기차 FAQ", "보조금 FAQ"])
 
 with tab1:
-    faq_subsidy = load_faq(SUBSIDY_FAQ_PATH)
-    show_faq(faq_subsidy)
+    faq_pse = load_faq(PSE_FAQ_PATH)
+    picked_pse = pick_faq(faq_pse)
+    show_faq(picked_pse)
 
 with tab2:
-    for question, answer in items[:over]:
-        with st.expander(question):
-            st.write(answer)
-
-
+    faq_subsidy = load_faq(SUBSIDY_FAQ_PATH)
+    show_faq(faq_subsidy)
+    
 st.divider()
 st.caption("본 정보는 참고용이며 정확한 내용은 공식 발표를 확인하세요.")

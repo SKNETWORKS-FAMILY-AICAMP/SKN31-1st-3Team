@@ -98,3 +98,18 @@ def crawl_pse_faq(url: str):
 
     faq = {q: a for q, a in zip(t, a)}
     return faq
+
+if __name__ == "__main__":
+    ev_vs_url = "https://ev-vs.com/blog/ev-subsidy-faq-2026"
+    pse_url = "https://www.pse.com/ko/pages/electric-cars/electric-vehicles-faq"
+
+    ev_vs_data = crawl_ev_subsidy_faq(ev_vs_url)
+    pse_data = crawl_pse_faq(pse_url)
+
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    DATASET_DIR = os.path.join(BASE_DIR, "../../backend/Dataset")
+
+    save_json(ev_vs_data, os.path.join(DATASET_DIR, "ev_vs_faq.json"))
+    save_json(pse_data, os.path.join(DATASET_DIR, "pse_faq.json"))
+
+    print("Dataset 폴더에 JSON 저장 완료")
