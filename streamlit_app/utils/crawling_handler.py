@@ -4,6 +4,10 @@ import json
 import os
 import streamlit as st
 
+"""_summary_
+1. 유가 가격 크롤링 : 2_유가분석, 5_시뮬레이터
+2. FAQ 크롤링 : 6_faq
+"""
 
 # =========================
 # 공통 설정
@@ -15,14 +19,13 @@ HEADERS = {
 
 
 # =========================
-# 공통 유틸
+# 1. 공통 유틸
 # =========================
 def get_soup(url: str):
     """HTML 가져와서 BeautifulSoup 반환"""
     res = requests.get(url, headers=HEADERS)
     res.raise_for_status()
     return BeautifulSoup(res.text, "lxml")
-
 
 def save_json(data, path):
     """JSON 저장"""
@@ -32,23 +35,31 @@ def save_json(data, path):
 
 
 # =========================
-# 1. 가격 크롤링 (Streamlit 캐시)
+# 1. 유가 가격 크롤링 (Streamlit 캐시)
 # =========================
-@st.cache_data
+@st.cache_data(ttl=3600)
 def get_current_x_price(url: str):
-    soup = get_soup(url)
+    """오일나우 페이지 가격 크롤링"""
 
-    sections = soup.select("div.grid.grid-cols-2.gap-4")
-    result = []
+    try:
+        soup = get_soup(url)
 
-    for section in sections:
-        h3_list = section.select("h3.text-title4-b")
-        for h3 in h3_list:
-            text = h3.get_text(strip=True)
-            if text:
-                result.append(text)
+        sections = soup.select("div.grid.grid-cols-2.gap-4")
+        result = []
 
-    return result
+        for section in sections:
+            h3_list = section.select("h3.text-title4-b")
+
+            for h3 in h3_list:
+                text = h3.get_text(strip=True)
+
+                if text:
+                    result.append(text)
+
+        return result if result else ["-", "-"]
+
+    except Exception:
+        return ["-", "-"]
 
 
 #url = "https://ev-vs.com/blog/ev-subsidy-faq-2026"
