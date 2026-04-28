@@ -1,28 +1,22 @@
 import streamlit as st
 import time
 import numpy as np
+import json
+import os
+from utils.crawling_handler import crawl_pse_faq
 
-st.set_page_config(page_title="테스트용 1pg", page_icon="📈")
+st.title("FAQ")
+st.text("자주 묻는 질문들을 모아봤습니다.")
 
-st.markdown("# Plotting Demo")
-st.sidebar.header("Plotting Demo")
+col1, col2 = st.columns(2)
 
-progress_bar = st.sidebar.progress(0)
-status_text = st.sidebar.empty()
-last_rows = np.random.randn(1, 1)
-chart = st.line_chart(last_rows)
+url= 'https://www.pse.com/ko/pages/electric-cars/electric-vehicles-faq'
 
-for i in range(1, 101):
-    new_rows = last_rows[-1, :] + np.random.randn(5, 1).cumsum(axis=0)
-    status_text.text("%i%% Complete" % i)
-    chart.add_rows(new_rows)
-    progress_bar.progress(i)
-    last_rows = new_rows
-    time.sleep(0.05)
+faq_data = crawl_pse_faq(url)
+items = list(faq_data.items())
+halfway = (len(items) + 1) // 2  
 
-progress_bar.empty()
-
-# Streamlit widgets automatically run the script from top to bottom. Since
-# this button is not connected to any other logic, it just causes a plain
-# rerun.
-st.button("Re-run")
+with col1:
+    for question, answer in items[:halfway]:
+        with st.expander(question):
+            st.write(answer)

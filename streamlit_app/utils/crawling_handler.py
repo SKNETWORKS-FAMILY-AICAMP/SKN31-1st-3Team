@@ -79,7 +79,7 @@ def crawl_ev_subsidy_faq(url: str):
 
     return faq
 
-
+# https://www.pse.com/ko/pages/electric-cars/electric-vehicles-faq
 # =========================
 # 3. PSE FAQ 크롤링
 # =========================
