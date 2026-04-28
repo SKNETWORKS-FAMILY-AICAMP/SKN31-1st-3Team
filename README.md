@@ -99,3 +99,13 @@
 <img src="https://img.shields.io/badge/BeautifulSoup-000000"/>
 <img src="https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white"/>
 </p>
+
+## 📝 팀 프로젝트 회고
+
+
+| 이름 | 회고 내용 |
+| :---: | :--- |
+| **박동관** |  |
+| **김봉남** |  |
+| **이영창** |  |
+| **박종현** |  |
