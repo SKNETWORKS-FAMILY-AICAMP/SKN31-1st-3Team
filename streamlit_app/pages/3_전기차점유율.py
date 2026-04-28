@@ -71,10 +71,13 @@ with col1:
 
 # 1번째 줄 우측 전체 자동차 대비 전기차 비중
 
-# 전기차 연도별 마지막 월 누적 합계
-ev_last = evcar.loc[evcar.groupby('year')['month'].idxmax()]
-ev_yearly = ev_last.groupby('year')['count'].sum().reset_index()
-ev_yearly.columns = ['year', 'ev_total']
+last_m = evcar.groupby('year')['month'].max().reset_index()
+last_m.columns = ['year', 'last_m']
+
+evcar = pd.merge(evcar, last_m, on='year')
+evcar = evcar[evcar['month'] == evcar['last_m']].groupby('year')['count'].sum().reset_index()
+evcar.columns = ['year', 'ev_total']
+
 
 # 전체 자동차 연도별 총계
 car_yearly = car[['year', 'total']].copy()
@@ -82,7 +85,7 @@ car_yearly.columns = ['year', 'car_total']
 car_yearly['year'] = car_yearly['year'].astype(int)
 
 # 병합 및 비중 계산
-df = pd.merge(ev_yearly, car_yearly, on='year')
+df = pd.merge(evcar, car_yearly, on='year')
 df['ev_ratio'] = (df['ev_total'] / df['car_total'] * 100).round(2)
 
 # 그래프
@@ -126,15 +129,15 @@ up = (ratio_2026 / ratio_2022 - 1)
 
 with col3:
     with st.container(border=True):
-        st.metric(label="2022년 신규 전기차 비중", value=f"{round(ratio_2022 * 100, 2)}%")
+        st.metric(label="2022년 신규 전기차 비중", value=f"{round(ratio_2022 * 100, 1)}%")
 
 with col4:
     with st.container(border=True):
-        st.metric(label="2026년 3월 신규 전기차 비중", value=f"{round(ratio_2026 * 100, 2)}%")
+        st.metric(label="2026년 3월 신규 전기차 비중", value=f"{round(ratio_2026 * 100, 1)}%")
 
 with col5:
     with st.container(border=True):
-        st.metric(label="22년 대비 2026년 03월 기준 신규 전기차 증가율", value=f"{round(up * 100, 2)}%")
+        st.metric(label="22년 대비 2026년 03월 기준 신규 전기차 증가율", value=f"+{round(up * 100, 1)}%")
 
 # 3번째 줄
 
@@ -152,9 +155,9 @@ rdf_table = rdf_table.rename(columns={
 })
 rdf_table = rdf_table[['연도', '자동차', '전기차', '전기차 비중(%)']]
 
-rdf_table['자동차'] = rdf_table['자동차'].apply(lambda x: f"{int(x):,}" if pd.notna(x) else '-')
-rdf_table['전기차'] = rdf_table['전기차'].apply(lambda x: f"{int(x):,}")
-rdf_table['전기차 비중(%)'] = rdf_table['전기차 비중(%)'].apply(lambda x: f"{x}%" if pd.notna(x) else '-')
+rdf_table['자동차'] = rdf_table['자동차'].apply(lambda x: f"{int(x):,}")
+rdf_table['전기차'] = rdf_table['전기차'].apply(lambda x: f"{int(x):,}") 
+rdf_table['전기차 비중(%)'] = rdf_table['전기차 비중(%)'].astype(str)+'%'
 
 st.dataframe(
     rdf_table,
