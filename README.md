@@ -1,4 +1,4 @@
-# SKN3-1st-3Team
+# SKN31-1st-3Team
 
 ---
 
