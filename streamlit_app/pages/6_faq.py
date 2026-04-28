@@ -1,9 +1,9 @@
-"""전기차 FAQ 페이지 - 보조금 FAQ / 전기차 일반 FAQ"""
-
+import streamlit as st
+import time
+import numpy as np
 import json
 import os
-import streamlit as st
-
+from utils.crawling_handler import crawl_pse_faq
 
 st.set_page_config(
     page_title="전기차 FAQ",
@@ -16,9 +16,6 @@ _THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 SUBSIDY_FAQ_PATH = os.path.join(
     _THIS_DIR, "..", "..", "backend", "Dataset", "faq_data.json"
 )
-EV_FAQ_PATH = os.path.join(
-    _THIS_DIR, "..", "..", "backend", "Dataset", "ev_faq_data.json"
-)
 
 
 @st.cache_data
@@ -29,7 +26,7 @@ def load_faq(path):
 
 def show_faq(faq_list):
     """FAQ 리스트를 검색창 + expander로 표시."""
-    search = st.text_input("질문 검색", placeholder="키워드를 입력하세요", key=faq_list[0]["question"])
+    search = None # st.text_input("질문 검색", placeholder="키워드를 입력하세요", key=faq_list[0]["question"]) 
 
     if search:
         keyword = search.lower()
@@ -44,7 +41,6 @@ def show_faq(faq_list):
     if not filtered:
         st.info("검색 결과가 없습니다.")
     else:
-        st.caption(f"총 {len(filtered)}개 질문")
         for item in filtered:
             with st.expander(item["question"]):
                 st.markdown(item["answer"])
@@ -52,22 +48,25 @@ def show_faq(faq_list):
 
 # ============================================================
 # 페이지
-# ============================================================
+url= 'https://www.pse.com/ko/pages/electric-cars/electric-vehicles-faq'
+faq_data = crawl_pse_faq(url)
+items = list(faq_data.items())
+over = (len(items) + 1) // 2  
 
-st.title("전기차 FAQ")
+st.title("FAQ")
+st.text("자주 묻는 질문들을 모아 봤습니다.")
 st.divider()
 
-tab1, tab2 = st.tabs(["💰 보조금 FAQ", "🚗 전기차 일반 FAQ"])
+tab1, tab2 = st.tabs(["보조금 FAQ", "전기차 FAQ"])
 
 with tab1:
-    st.caption("2026년 전기차 보조금 관련 자주 묻는 질문")
     faq_subsidy = load_faq(SUBSIDY_FAQ_PATH)
     show_faq(faq_subsidy)
 
 with tab2:
-    st.caption("전기차 관련 일반 궁금증")
-    faq_ev = load_faq(EV_FAQ_PATH)
-    show_faq(faq_ev)
+    for question, answer in items[:over]:
+        with st.expander(question):
+            st.write(answer)
 
 
 st.divider()
