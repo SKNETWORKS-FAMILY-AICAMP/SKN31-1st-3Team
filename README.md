@@ -101,6 +101,10 @@
 </p>
 
 ---
+## 🎥 데모 영상
+
+[![시연 영상](./asset/시연연상썸네일.png)](https://www.youtube.com/watch?v=JZ2ubuWqa5s)
+---
 
 ## 📅 WBS (작업 일정)
 
